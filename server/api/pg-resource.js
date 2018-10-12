@@ -17,12 +17,12 @@ function tagsQueryString(tags, itemid, result) {
         );
 }
 
-module.exports = (postgres) => {
+module.exports = postgres => {
   return {
-    async createUser({ fullname, email, password }) {
+    async createUser({ email, fullname, bio, password }) {
       const newUserInsert = {
-        text: '', // @TODO: Authentication - Server
-        values: [fullname, email, password]
+        text: 'insert into users(email, fullname, bio, password)', // @TODO: Authentication - Server
+        values: [email, fullname, bio, password]
       };
       try {
         const user = await postgres.query(newUserInsert);
@@ -73,9 +73,16 @@ module.exports = (postgres) => {
        */
 
       const findUserQuery = {
-        text: '', // @TODO: Basic queries
+        text: 'select id, fullname, bio, email from users where id = $1;', // @TODO: Basic queries
         values: [id]
       };
+      try {
+        const user = await postgres.query(findUserQuery);
+        if (!user) throw 'User was not found.';
+        return user.rows[0];
+      } catch (e) {
+        throw 'User was not found.';
+      }
 
       /**
        *  Refactor the following code using the error handling logic described above.
@@ -87,10 +94,10 @@ module.exports = (postgres) => {
        */
 
       const user = await postgres.query(findUserQuery);
-      return user;
+      return user.rows[0];
       // -------------------------------
     },
-    async getItems(idToOmit) {
+    async getItems(filter) {
       const items = await postgres.query({
         /**
          *  @TODO: Advanced queries
@@ -103,8 +110,8 @@ module.exports = (postgres) => {
          *  to your query text using string interpolation
          */
 
-        text: ``,
-        values: idToOmit ? [idToOmit] : []
+        text: `SELECT * FROM items WHERE ownerid <> $1 AND borrowerid <> $1 OR borrowerid IS NULL`,
+        values: filter ? [filter] : []
       });
       return items.rows;
     },
@@ -114,7 +121,7 @@ module.exports = (postgres) => {
          *  @TODO: Advanced queries
          *  Get all Items. Hint: You'll need to use a LEFT INNER JOIN among others
          */
-        text: ``,
+        text: `select * from items where ownerid = $1;`,
         values: [id]
       });
       return items.rows;
@@ -125,18 +132,19 @@ module.exports = (postgres) => {
          *  @TODO: Advanced queries
          *  Get all Items. Hint: You'll need to use a LEFT INNER JOIN among others
          */
-        text: ``,
+        text: `select * from items where borrowerid = $1`,
         values: [id]
       });
       return items.rows;
     },
     async getTags() {
-      const tags = await postgres.query(/* @TODO: Basic queries */);
+      const tags = await postgres.query('SELECT * FROM tags');
       return tags.rows;
     },
     async getTagsForItem(id) {
       const tagsQuery = {
-        text: ``, // @TODO: Advanced queries
+        text: `SELECT tags.id, tags.title FROM itemtags INNER JOIN  tags ON (itemtags.tagid = tags.id) WHERE itemtags.itemid = $1;
+        `, // @TODO: Advanced queries
         values: [id]
       };
 

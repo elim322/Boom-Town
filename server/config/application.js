@@ -45,9 +45,9 @@ module.exports = app => {
    *  For example: app.set('PG_HOST', process.env.PG_HOST || 'localhost')
    */
   app.set('PG_HOST', process.env.PG_HOST || 'localhost');
-  app.set('PG_USER', process.env.PG_USER || 'localhost');
-  app.set('PG_PASSWORD', process.env.PG_PASSWORD || 'localhost');
-  app.set('PG_DB', process.env.PG_DB || 'localhost');
+  app.set('PG_USER', process.env.PG_USER || 'boomtown');
+  app.set('PG_PASSWORD', process.env.PG_PASSWORD || 'boomtown');
+  app.set('PG_DB', process.env.PG_DB || 'boomtown');
 
   app.use(cookieParser());
 
