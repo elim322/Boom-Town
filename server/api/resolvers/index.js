@@ -45,6 +45,7 @@ module.exports = app => {
         return null;
       },
       async user(parent, { id }, { pgResource }, info) {
+        //gets user by inputting user ID
         try {
           const user = await pgResource.getUserById(id);
           return user;
@@ -53,6 +54,7 @@ module.exports = app => {
         }
       },
       async items(parent, { filter }, { pgResource }, info) {
+        //query for retrieving items
         try {
           const items = await pgResource.getItems(filter);
           return items;
@@ -61,6 +63,7 @@ module.exports = app => {
         }
       },
       async tags(parent, { id }, { pgResource }, info) {
+        // returns all tags
         try {
           const tags = await pgResource.getTags(id);
           return tags;
@@ -81,8 +84,8 @@ module.exports = app => {
        *  Items (GraphQL type) the user has lent (items) and borrowed (borrowed).
        *
        */
-      // @TODO: Uncomment these lines after you define the User type with these fields
       async items(parent, { id }, { pgResource }, info) {
+        //gets items that user owns
         try {
           const items = await pgResource.getItemsForUser(parent.id);
           return items;
@@ -91,6 +94,7 @@ module.exports = app => {
         }
       },
       async borrowed(parent, { id }, { pgResource }, info) {
+        // gets items that user borrowed
         try {
           const borrowed = await pgResource.getBorrowedItemsForUser(parent.id);
           return borrowed;
@@ -113,6 +117,7 @@ module.exports = app => {
        */
       // @TODO: Uncomment these lines after you define the Item type with these fields
       async itemowner(parent, { id }, { pgResource }, info) {
+        //gets items owned by a user by inputting userID
         try {
           const itemowner = await pgResource.getUserById(parent.ownerid);
           return itemowner;
@@ -121,6 +126,7 @@ module.exports = app => {
         }
       },
       async tags(parent, { id }, { pgResource }, info) {
+        // gets all tags associated to an inputted item
         try {
           const tags = await pgResource.getTagsForItem(parent.id);
           return tags;
@@ -129,6 +135,7 @@ module.exports = app => {
         }
       },
       async borrower(parent, { id }, { pgResource }, info) {
+        // gets items borrowed by a user
         try {
           const borrower = await pgResource.getUserById(parent.borrowerid);
           return borrower;

@@ -99,21 +99,15 @@ module.exports = postgres => {
     },
     async getItems(filter) {
       const items = await postgres.query({
-        /**
-         *  @TODO: Advanced queries
-         *
-         *  Get all Items. If the idToOmit parameter has a value,
-         *  the query should only return Items were the ownerid column
-         *  does not contain the 'idToOmit'
-         *
-         *  Hint: You'll need to use a conditional AND and WHERE clause
-         *  to your query text using string interpolation
-         */
-
         text: `SELECT * FROM items WHERE ownerid <> $1 AND borrowerid <> $1 OR borrowerid IS NULL`,
         values: filter ? [filter] : []
       });
-      return items.rows;
+      try {
+        if (!items) throw 'Item was not found.';
+        return items.rows;
+      } catch (e) {
+        throw 'Item was not found.';
+      }
     },
     async getItemsForUser(id) {
       const items = await postgres.query({
@@ -124,18 +118,24 @@ module.exports = postgres => {
         text: `select * from items where ownerid = $1;`,
         values: [id]
       });
-      return items.rows;
+      try {
+        if (!items) throw 'User has no items.';
+        return items.rows;
+      } catch (e) {
+        throw 'User has no items.';
+      }
     },
     async getBorrowedItemsForUser(id) {
       const items = await postgres.query({
-        /**
-         *  @TODO: Advanced queries
-         *  Get all Items. Hint: You'll need to use a LEFT INNER JOIN among others
-         */
         text: `select * from items where borrowerid = $1`,
         values: [id]
       });
-      return items.rows;
+      try {
+        if (!items) throw 'User does not have any borrowed items.';
+        return items.rows;
+      } catch (e) {
+        throw 'User does ot have any borrowed items.';
+      }
     },
     async getTags() {
       const tags = await postgres.query('SELECT * FROM tags');
@@ -144,12 +144,16 @@ module.exports = postgres => {
     async getTagsForItem(id) {
       const tagsQuery = {
         text: `SELECT tags.id, tags.title FROM itemtags INNER JOIN  tags ON (itemtags.tagid = tags.id) WHERE itemtags.itemid = $1;
-        `, // @TODO: Advanced queries
+        `,
         values: [id]
       };
-
       const tags = await postgres.query(tagsQuery);
-      return tags.rows;
+      try {
+        if (!tags) throw 'Tag was not found.';
+        return tags.rows;
+      } catch (e) {
+        throw 'Tag was not found.';
+      }
     },
     async saveNewItem({ item, image, user }) {
       /**
