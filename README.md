@@ -1,5 +1,17 @@
 # Boomtown 🏙
 
+## About the Project
+
+A program that allows users to share an item with the ability to borrow/return.
+
+## Part 1: Backend (Part 2 to follow)
+
+- PosgreSQL
+- GraphQL
+- Express
+- Node
+- Apollo
+
 ## Server
 
 Commands must be run from the `server` directory:
@@ -89,5 +101,3 @@ Run all tests:
 ```bash
 npm run test
 ```
-
-
