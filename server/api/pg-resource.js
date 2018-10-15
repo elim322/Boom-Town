@@ -78,7 +78,7 @@ module.exports = postgres => {
       };
       try {
         const user = await postgres.query(findUserQuery);
-        if (!user) throw 'User was not found.';
+        if (user.rows.length < 1) throw 'User was not found.';
         return user.rows[0];
       } catch (e) {
         throw 'User was not found.';
