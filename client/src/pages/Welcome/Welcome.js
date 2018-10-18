@@ -9,7 +9,7 @@ import AccountForm from '../../components/AccountForm';
 
 import styles from './styles';
 
-const Home = ({ classes }) => {
+const Welcome = ({ classes }) => {
   return (
     <Grid
       container
@@ -40,4 +40,4 @@ const Home = ({ classes }) => {
   );
 };
 
-export default withStyles(styles)(Home);
+export default withStyles(styles)(Welcome);
