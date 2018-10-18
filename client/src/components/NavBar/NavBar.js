@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 class NavBar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
   render() {
     return (
-      <div>
-        <p>this is the navbar</p>
-      </div>
+      this.props.location.pathname !== '/Welcome' && (
+        <div>
+          <p>this is the navbar</p>
+        </div>
+      )
     );
   }
 }
 
-export default NavBar;
+export default withRouter(NavBar);
