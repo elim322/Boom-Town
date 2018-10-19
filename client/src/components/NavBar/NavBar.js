@@ -8,7 +8,7 @@ class NavBar extends Component {
   }
   render() {
     return (
-      this.props.location.pathname !== '/Welcome' && (
+      this.props.location.pathname !== '/Welcome' && ( //logic to make navbar appear in all pages but welcome page
         <div>
           <p>this is the navbar</p>
         </div>
