@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Form, Fields } from 'react-final-form';
 
 class ShareForm extends Component {
   constructor(props) {
@@ -9,7 +10,24 @@ class ShareForm extends Component {
   render() {
     return (
       <div>
-        <p>This is the share form.</p>
+        <button>Select Image</button>
+        <label>
+          <input
+            id="item-name"
+            name="item-name"
+            type="text"
+            placeholder="name your item"
+          />
+        </label>
+        <label>
+          <input
+            id="item-description"
+            name="item-name"
+            type="text"
+            placeholder="describe your item"
+          />
+        </label>
+        <button>Share</button>
       </div>
     );
   }
