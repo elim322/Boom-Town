@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
