@@ -11,6 +11,7 @@ import BoomtownLogo from './../../images/boomtown.svg';
 import Button from '@material-ui/core/Button';
 import Dots from '@material-ui/icons/MoreVert';
 import IconButton from '@material-ui/core/IconButton';
+import DropDown from '../DropDown';
 
 const NavBar = ({ classes }) => {
   return (
@@ -29,7 +30,7 @@ const NavBar = ({ classes }) => {
                 SHARE SOMETHING
               </Button>
               <IconButton>
-                <Dots />
+                <DropDown />
               </IconButton>
             </Link>
           </div>
