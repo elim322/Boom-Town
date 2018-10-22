@@ -15,47 +15,21 @@ import IconButton from '@material-ui/core/IconButton';
 const NavBar = ({ classes }) => {
   return (
     <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar
-          style={{
-            margin: '10px',
-            display: 'flex',
-            justifyContent: 'space-between'
-          }}
-        >
+      <AppBar>
+        <Toolbar>
           <img
             src={BoomtownLogo}
             alt="Boomtown Logo"
-            style={{
-              height: '40px',
-              width: 'auto',
-              position: 'relative',
-              bottom: '10px',
-              right: '10px'
-            }}
+            className={classes.Logo}
           />
           <div>
-            <Link
-              to="/share"
-              style={{
-                position: 'relative',
-                bottom: '10px'
-              }}
-            >
+            <Link to="/share">
               <Button to="/share">
-                <Icon
-                  style={{
-                    margin: '10px'
-                  }}
-                />
+                <Icon />
                 SHARE SOMETHING
               </Button>
               <IconButton>
-                <Dots
-                  style={{
-                    opacity: '0.7'
-                  }}
-                />
+                <Dots />
               </IconButton>
             </Link>
           </div>
@@ -69,4 +43,4 @@ const NavBar = ({ classes }) => {
 //   classes: PropTypes.object.isRequired
 // };
 
-export default withStyles()(withRouter(NavBar));
+export default withStyles(styles)(withRouter(NavBar));
