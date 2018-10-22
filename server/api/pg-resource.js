@@ -98,40 +98,40 @@ module.exports = postgres => {
       // -------------------------------
     },
     async getItems(filter) {
-      const items = await postgres.query({
+      const findItemQuery = {
         text: `SELECT * FROM items WHERE ownerid <> $1 AND borrowerid <> $1 OR borrowerid IS NULL`,
         values: filter ? [filter] : []
-      });
+      };
       try {
-        if (!items) throw 'Item was not found.'; // add conditional to query database else throw error
+        const items = await postgres.query(findItemQuery);
+        if (items.rows.length < 1) throw 'Item was not found.'; // add conditional to query database else throw error
         return items.rows;
       } catch (e) {
         throw 'Item was not found.';
       }
     },
     async getItemsForUser(id) {
-      const items = await postgres.query({
-        /**
-         *  @TODO: Advanced queries
-         *  Get all Items. Hint: You'll need to use a LEFT INNER JOIN among others
-         */
+      const findItemsForUserQuery = {
         text: `select * from items where ownerid = $1;`,
         values: [id]
-      });
+      };
       try {
-        if (!items) throw 'User has no items.';
+        const items = await postgres.query(findItemsForUserQuery);
+        if (items.rows.length < 1) throw 'User has no items.';
         return items.rows;
       } catch (e) {
         throw 'User has no items.';
       }
     },
     async getBorrowedItemsForUser(id) {
-      const items = await postgres.query({
+      const findBorrowedItemsForUserQuery = {
         text: `select * from items where borrowerid = $1`,
         values: [id]
-      });
+      };
       try {
-        if (!items) throw 'User does not have any borrowed items.';
+        const items = await postgres.query(findBorrowedItemsForUserQuery);
+        if (items.rows.length < 1)
+          throw 'User does not have any borrowed items.';
         return items.rows;
       } catch (e) {
         throw 'User does ot have any borrowed items.';
@@ -142,14 +142,14 @@ module.exports = postgres => {
       return tags.rows;
     },
     async getTagsForItem(id) {
-      const tagsQuery = {
+      const findTagsForItemQuery = {
         text: `SELECT tags.id, tags.title FROM itemtags INNER JOIN  tags ON (itemtags.tagid = tags.id) WHERE itemtags.itemid = $1;
         `,
         values: [id]
       };
-      const tags = await postgres.query(tagsQuery);
       try {
-        if (!tags) throw 'Tag was not found.';
+        const tags = await postgres.query(findTagsForItemQuery);
+        if (tags.rows.length < 1) throw 'Tag was not found.';
         return tags.rows;
       } catch (e) {
         throw 'Tag was not found.';
