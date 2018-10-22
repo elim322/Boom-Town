@@ -21,7 +21,7 @@ module.exports = postgres => {
   return {
     async createUser({ email, fullname, bio, password }) {
       const newUserInsert = {
-        text: 'insert into users(email, fullname, bio, password)', // @TODO: Authentication - Server
+        text: 'INSER INTO users(email, fullname, bio, password)', // @TODO: Authentication - Server
         values: [email, fullname, bio, password]
       };
       try {
@@ -112,7 +112,7 @@ module.exports = postgres => {
     },
     async getItemsForUser(id) {
       const findItemsForUserQuery = {
-        text: `select * from items where ownerid = $1;`,
+        text: `SELECT * FROM items WHERE ownerid = $1;`,
         values: [id]
       };
       try {
@@ -125,7 +125,7 @@ module.exports = postgres => {
     },
     async getBorrowedItemsForUser(id) {
       const findBorrowedItemsForUserQuery = {
-        text: `select * from items where borrowerid = $1`,
+        text: `SELECT * FROM items WHERE borrowerid = $1`,
         values: [id]
       };
       try {
