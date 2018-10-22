@@ -12,7 +12,9 @@ class ShareForm extends Component {
   render() {
     return (
       <div>
-        <button>Select Image</button>
+        <button id="submit" type="submit">
+          Select Image
+        </button>
         <label>
           <input
             id="item-name"
@@ -29,7 +31,9 @@ class ShareForm extends Component {
             placeholder="describe your item"
           />
         </label>
-        <button>Share</button>
+        <button id="submit" type="submit">
+          Share
+        </button>
       </div>
     );
   }
