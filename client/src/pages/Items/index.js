@@ -1,3 +1,3 @@
-import ItemsContainer from './ItemsContainer';
+import Items from './Items.js';
 
-export default ItemsContainer;
+export default Items;
