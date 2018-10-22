@@ -16,7 +16,7 @@ const NavBar = ({ classes }) => {
   return (
     <div className={classes.root}>
       <AppBar>
-        <Toolbar>
+        <Toolbar className={classes.Tool}>
           <img
             src={BoomtownLogo}
             alt="Boomtown Logo"
