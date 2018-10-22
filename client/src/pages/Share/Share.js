@@ -5,14 +5,14 @@ import ItemCards from '../../components/ItemCards';
 
 import styles from './styles';
 
-const Share = ({ classes }) => {
+const Share = ({ classes, tags }) => {
   return (
     <div className={classes.Share}>
       <div className={classes.Card}>
         <ItemCards />
       </div>
       <div className={classes.Form}>
-        <ShareItemForm />
+        <ShareItemForm tags={tags} />
       </div>
     </div>
   );

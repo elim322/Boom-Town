@@ -36,7 +36,7 @@ export const ITEM_QUERY = gql`
 `;
 
 export const ALL_ITEMS_QUERY = gql`
-  query items($filter: ID) {
+  query items($filter: ID!) {
     items(filter: $filter) {
       ...ItemFields
     }
@@ -63,7 +63,6 @@ export const ALL_USER_ITEMS_QUERY = gql`
 
 export const ALL_TAGS_QUERY = gql`
   query {
-    # @TODO: Query the id and title fields for tags.
     tags {
       id
       title

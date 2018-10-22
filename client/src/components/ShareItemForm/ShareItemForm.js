@@ -1,21 +1,18 @@
 import React, { Component } from 'react';
 import { Form, Field } from 'react-final-form';
-import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import styles from './styles';
 import { withStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
+import Select from '@material-ui/core/Select';
 
 class ShareItemForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      age: '',
+      tags: 'Add Tag',
       open: false
     };
   }
@@ -40,7 +37,7 @@ class ShareItemForm extends Component {
 
   render() {
     console.log(this.state);
-    const { classes } = this.props;
+    const { classes, tags } = this.props;
     return (
       <div className={this.props.classes.root}>
         <Typography component="h2" variant="h1" gutterBottom>
@@ -88,31 +85,25 @@ class ShareItemForm extends Component {
                     )}
                   />
                 </label>
-                <form autoComplete="off">
-                  <FormControl className={classes.formControl}>
-                    <InputLabel htmlFor="demo-controlled-open-select">
-                      Add some Tags
-                    </InputLabel>
+                <Field
+                  name="addTag"
+                  render={({ input, meta }) => (
                     <Select
-                      open={this.state.open}
-                      onClose={this.handleClose}
-                      onOpen={this.handleOpen}
-                      value={this.state.age}
+                      value={this.state.tag}
                       onChange={this.handleChange}
                       inputProps={{
                         name: 'tags',
-                        id: 'demo-controlled-open-select'
+                        id: 'add-tag'
                       }}
                     >
-                      <MenuItem value="">
-                        <em>None</em>
-                      </MenuItem>
-                      <MenuItem value={10}>Ten</MenuItem>
-                      <MenuItem value={20}>Twenty</MenuItem>
-                      <MenuItem value={30}>Thirty</MenuItem>
+                      {tags.map(tag => (
+                        <MenuItem key={tag.id} value={tag.title}>
+                          {tag.title}
+                        </MenuItem>
+                      ))}
                     </Select>
-                  </FormControl>
-                </form>
+                  )}
+                />
               </fieldset>
               <fieldset className={classes.shareButton}>
                 <Button
