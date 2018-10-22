@@ -4,7 +4,9 @@ import { Form, Fields } from 'react-final-form';
 class ShareForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      formToggle: true
+    };
   }
 
   render() {
