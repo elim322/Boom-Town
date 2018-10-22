@@ -103,7 +103,7 @@ module.exports = postgres => {
         values: filter ? [filter] : []
       });
       try {
-        if (!items) throw 'Item was not found.';
+        if (!items) throw 'Item was not found.'; // add conditional to query database else throw error
         return items.rows;
       } catch (e) {
         throw 'Item was not found.';
