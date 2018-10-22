@@ -43,7 +43,9 @@ class ShareItemForm extends Component {
     const { classes } = this.props;
     return (
       <div className={this.props.classes.root}>
-        <Typography>SHARE. BORROW. PROSPER.</Typography>
+        <Typography component="h2" variant="h1" gutterBottom>
+          SHARE. BORROW. PROSPER.
+        </Typography>
         <Form
           // validate={values => this.validate(values)}
           onSubmit={(e, form) => this.submitTheForm(e, form)}

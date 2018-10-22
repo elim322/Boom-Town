@@ -7,11 +7,7 @@ const styles = theme => ({
   },
   Form: {
     display: 'flex',
-    flexDirection: 'column',
-    maxWidth: '25%'
-  },
-  Card: {
-    marginLeft: '150px'
+    flexDirection: 'column'
   }
 });
 

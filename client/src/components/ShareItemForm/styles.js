@@ -2,7 +2,7 @@ const styles = theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    width: '50%'
+    width: '100%'
   },
   Typography: {
     fontWeight: 900
