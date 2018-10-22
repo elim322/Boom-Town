@@ -8,6 +8,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import styles from './styles';
 
 function ItemCards(props) {
   const { classes } = props;
@@ -38,8 +39,8 @@ function ItemCards(props) {
   );
 }
 
-MediaCard.propTypes = {
-  classes: PropTypes.object.isRequired
-};
+// ItemCards.propTypes = {
+//   classes: PropTypes.object.isRequired
+// };
 
 export default withStyles(styles)(ItemCards);

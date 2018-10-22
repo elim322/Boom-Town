@@ -1,5 +1,6 @@
 import { withStyles } from '@material-ui/core/styles';
 import React from 'react';
+import ItemCards from '../../components/ItemCards/ItemCards';
 
 import styles from './styles';
 

@@ -24,6 +24,9 @@ const styles = theme => ({
   },
   Icon: {
     margin: '10px'
+  },
+  Dots: {
+    opacity: '0.7'
   }
 });
 
