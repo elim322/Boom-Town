@@ -1,7 +1,17 @@
 const styles = theme => ({
   Share: {
-    width: '80%',
-    margin: '0 auto'
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    height: '90%'
+  },
+  Form: {
+    display: 'flex',
+    flexDirection: 'column',
+    maxWidth: '25%'
+  },
+  Card: {
+    marginLeft: '150px'
   }
 });
 
