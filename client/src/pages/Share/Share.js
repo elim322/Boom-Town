@@ -1,15 +1,15 @@
 import { withStyles } from '@material-ui/core/styles';
 import React from 'react';
 import ShareItemForm from '../../components/ShareItemForm';
-import ItemCards from '../../components/ItemCards';
 
 import styles from './styles';
+import ShareItemPreview from '../../components/ShareItemPreview/ShareItemPreview';
 
 const Share = ({ classes, tags }) => {
   return (
     <div className={classes.Share}>
       <div className={classes.Card}>
-        <ItemCards />
+        <ShareItemPreview />
       </div>
       <div className={classes.Form}>
         <ShareItemForm tags={tags} />

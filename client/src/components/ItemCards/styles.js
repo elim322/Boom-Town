@@ -1,6 +1,8 @@
 const styles = {
   card: {
-    maxWidth: 345
+    width: '350px',
+    height: '400px',
+    marginTop: '100px'
   },
   media: {
     height: 140

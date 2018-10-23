@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { ItemCards } from '../ItemCards';
+import React from 'react';
+import ItemCards from '../ItemCards/ItemCards';
 
 const ShareItemPreview = ({ classes }) => {
   return (
-    <div className={classes.root}>
+    <div>
       <ItemCards />
     </div>
   );
 };
 
-export default withStyles(ShareItemPreview);
+export default ShareItemPreview;
