@@ -15,15 +15,23 @@ function ItemCards(props) {
   return (
     <Card className={classes.card}>
       <CardMedia className={classes.media} placeholder="Select your image" />
+
       <CardContent>
-        <Typography gutterBottom variant="h5" component="h2">
+        <Typography
+          className={classes.name}
+          gutterBottom
+          variant="h5"
+          component="h2"
+        >
           Name your item
         </Typography>
-        <Typography component="p">Describe your item</Typography>
+        <Typography className={classes.description} component="p">
+          Describe your item
+        </Typography>
       </CardContent>
 
       <CardActions>
-        <Button size="medium" color="secondary">
+        <Button className={classes.borrow} size="large" variant="contained">
           Borrow
         </Button>
       </CardActions>
