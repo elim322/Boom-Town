@@ -11,7 +11,8 @@ const styles = theme => ({
     marginBottom: '50px',
     width: '300px',
     paddingLeft: '10px',
-    fontSize: '50px'
+    fontSize: '50px',
+    minWidth: '110%'
   },
   form: {
     border: 'none',

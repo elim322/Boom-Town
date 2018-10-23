@@ -7,13 +7,16 @@ import { withStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
+import Checkbox from '@material-ui/core/Checkbox';
+import ListItemText from '@material-ui/core/ListItemText';
 
 class ShareItemForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       tags: 'Add Tag',
-      open: false
+      open: false,
+      tag: []
     };
   }
 
@@ -35,6 +38,10 @@ class ShareItemForm extends Component {
     this.setState({ open: true });
   };
 
+  handleChange = tag => event => {
+    this.setState({ [tag]: event.target.checked });
+  };
+
   render() {
     console.log(this.state);
     const { classes, tags } = this.props;
@@ -43,7 +50,8 @@ class ShareItemForm extends Component {
         <Typography
           className={classes.title}
           component="h2"
-          variant="h1"
+          variant="display1"
+          color="secondary"
           gutterBottom
         >
           SHARE. BORROW. PROSPER.
@@ -95,6 +103,7 @@ class ShareItemForm extends Component {
                   name="addTag"
                   render={({ input, meta }) => (
                     <Select
+                      multiple
                       className={classes.tags}
                       value={this.state.tag}
                       onChange={this.handleChange}
@@ -105,7 +114,8 @@ class ShareItemForm extends Component {
                     >
                       {tags.map(tag => (
                         <MenuItem key={tag.id} value={tag.title}>
-                          {tag.title}
+                          <Checkbox>{tag.title}</Checkbox>
+                          <ListItemText primary={tag.title} />
                         </MenuItem>
                       ))}
                     </Select>
