@@ -47,15 +47,14 @@ class DropDown extends React.Component {
             }
           }}
         >
-          {options.map(option => (
-            <MenuItem
-              key={option}
-              selected={option === 'Pyxis'}
-              onClick={this.handleClose}
-            >
-              {option}
-            </MenuItem>
-          ))}
+          <MenuItem>
+            <i class="material-icons">fingerprint</i>
+            <p>Your Profile </p>
+          </MenuItem>
+          <MenuItem>
+            <p>Sign Out</p>
+          </MenuItem>
+          )
         </Menu>
       </div>
     );
