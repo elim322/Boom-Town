@@ -39,6 +39,9 @@ const styles = theme => ({
     paddingBottom: '10px',
     marginTop: '10px'
   },
+  tagLabel: {
+    paddingTop: '30px'
+  },
   share: {
     border: 'none'
   },

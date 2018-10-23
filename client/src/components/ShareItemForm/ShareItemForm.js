@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Form, Field } from 'react-final-form';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
@@ -9,6 +9,7 @@ import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import Checkbox from '@material-ui/core/Checkbox';
 import ListItemText from '@material-ui/core/ListItemText';
+import InputLabel from '@material-ui/core/InputLabel';
 
 class ShareItemForm extends Component {
   constructor(props) {
@@ -99,26 +100,32 @@ class ShareItemForm extends Component {
                     )}
                   />
                 </label>
+
                 <Field
                   name="addTag"
                   render={({ input, meta }) => (
-                    <Select
-                      multiple
-                      className={classes.tags}
-                      value={this.state.tag}
-                      onChange={this.handleChange}
-                      inputProps={{
-                        name: 'tags',
-                        id: 'add-tag'
-                      }}
-                    >
-                      {tags.map(tag => (
-                        <MenuItem key={tag.id} value={tag.title}>
-                          <Checkbox>{tag.title}</Checkbox>
-                          <ListItemText primary={tag.title} />
-                        </MenuItem>
-                      ))}
-                    </Select>
+                    <Fragment>
+                      <InputLabel className={classes.tagLabel}>
+                        Add some tags
+                      </InputLabel>
+                      <Select
+                        multiple
+                        className={classes.tags}
+                        value={this.state.tag}
+                        onChange={this.handleChange}
+                        inputProps={{
+                          name: 'tags',
+                          id: 'add-tag'
+                        }}
+                      >
+                        {tags.map(tag => (
+                          <MenuItem key={tag.id} value={tag.title}>
+                            <Checkbox>{tag.title}</Checkbox>
+                            <ListItemText primary={tag.title} />
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </Fragment>
                   )}
                 />
               </fieldset>
