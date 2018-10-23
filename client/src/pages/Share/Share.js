@@ -1,20 +1,17 @@
 import { withStyles } from '@material-ui/core/styles';
 import React from 'react';
 import ShareItemForm from '../../components/ShareItemForm';
-
+import Grid from '@material-ui/core/Grid';
 import styles from './styles';
 import ShareItemPreview from '../../components/ShareItemPreview/ShareItemPreview';
 
 const Share = ({ classes, tags }) => {
   return (
-    <div className={classes.Share}>
-      <div className={classes.Card}>
-        <ShareItemPreview />
-      </div>
-      <div className={classes.Form}>
-        <ShareItemForm tags={tags} />
-      </div>
-    </div>
+    <Grid className={classes.Share}>
+      <ShareItemPreview />
+
+      <ShareItemForm tags={tags} />
+    </Grid>
   );
 };
 

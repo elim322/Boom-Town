@@ -40,7 +40,12 @@ class ShareItemForm extends Component {
     const { classes, tags } = this.props;
     return (
       <div className={this.props.classes.root}>
-        <Typography component="h2" variant="h1" gutterBottom>
+        <Typography
+          className={classes.title}
+          component="h2"
+          variant="h1"
+          gutterBottom
+        >
           SHARE. BORROW. PROSPER.
         </Typography>
         <Form
@@ -54,6 +59,7 @@ class ShareItemForm extends Component {
                   type="submit"
                   variant="contained"
                   color="primary"
+                  className={classes.select}
                 >
                   SELECT IMAGE
                 </Button>
@@ -89,6 +95,7 @@ class ShareItemForm extends Component {
                   name="addTag"
                   render={({ input, meta }) => (
                     <Select
+                      className={classes.tags}
                       value={this.state.tag}
                       onChange={this.handleChange}
                       inputProps={{
@@ -105,12 +112,13 @@ class ShareItemForm extends Component {
                   )}
                 />
               </fieldset>
-              <fieldset className={classes.shareButton}>
+              <fieldset className={classes.share}>
                 <Button
                   id="submit"
                   type="submit"
                   variant="contained"
                   color="primary"
+                  className={classes.shareButton}
                 >
                   SHARE
                 </Button>
