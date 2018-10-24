@@ -17,11 +17,11 @@ export const resetNewItemImage = () => ({
 
 // Initial State
 const initialState = {
-  title: 'New Item',
+  title: 'Name your item',
   description: 'Describe your item',
   date: new Date(),
   imageurl: 'https://via.placeholder.com/350x250?text=Please select an image',
-  owner: {},
+  itemowner: {},
   tags: []
 };
 

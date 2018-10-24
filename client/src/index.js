@@ -68,14 +68,14 @@ import './index.css';
 const App = () => {
   return (
     <ReduxProvider store={store}>
-      <Router>
-        <MuiThemeProvider theme={theme}>
-          <ApolloProvider client={client}>
-            <CssBaseline />
+      <MuiThemeProvider theme={theme}>
+        <ApolloProvider client={client}>
+          <CssBaseline />
+          <Router>
             <Layout />
-          </ApolloProvider>
-        </MuiThemeProvider>
-      </Router>
+          </Router>
+        </ApolloProvider>
+      </MuiThemeProvider>
     </ReduxProvider>
   );
 };

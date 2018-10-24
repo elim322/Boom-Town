@@ -10,6 +10,12 @@ import Select from '@material-ui/core/Select';
 import Checkbox from '@material-ui/core/Checkbox';
 import ListItemText from '@material-ui/core/ListItemText';
 import InputLabel from '@material-ui/core/InputLabel';
+import { connect } from 'react-redux';
+import {
+  updateNewItem,
+  resetNewItem,
+  resetNewItemImage
+} from '../../redux/modules/ShareItemPreview';
 
 class ShareItemForm extends Component {
   constructor(props) {
@@ -47,7 +53,7 @@ class ShareItemForm extends Component {
     console.log(this.state);
     const { classes, tags } = this.props;
     return (
-      <div className={this.props.classes.root}>
+      <div className={classes.root}>
         <Typography
           className={classes.title}
           component="h2"
@@ -148,4 +154,19 @@ class ShareItemForm extends Component {
   }
 }
 
-export default withStyles(styles)(ShareItemForm);
+const mapDispatchToProps = dispatch => ({
+  updateNewItem(item) {
+    dispatch(updateNewItem(item));
+  },
+  resetNewItem() {
+    dispatch(resetNewItem());
+  },
+  resetNewItemImage() {
+    dispatch(resetNewItemImage());
+  }
+});
+
+export default connect(
+  undefined,
+  mapDispatchToProps
+)(withStyles(styles)(ShareItemForm));
