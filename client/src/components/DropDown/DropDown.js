@@ -3,6 +3,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { Link } from 'react-router-dom';
 
 const options = ['Your Profile', 'Sign Out'];
 
@@ -47,13 +48,17 @@ class DropDown extends React.Component {
             }
           }}
         >
-          <MenuItem>
-            <i class="material-icons">fingerprint</i>
-            <p>Your Profile </p>
-          </MenuItem>
-          <MenuItem>
-            <p>Sign Out</p>
-          </MenuItem>
+          <Link to="/profile/:id">
+            <MenuItem>
+              <i class="material-icons">fingerprint</i>
+              <p>Your Profile </p>
+            </MenuItem>
+          </Link>
+          <Link to="/welcome">
+            <MenuItem>
+              <p>Sign Out</p>
+            </MenuItem>
+          </Link>
           )
         </Menu>
       </div>

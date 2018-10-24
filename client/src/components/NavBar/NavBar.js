@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 import Icon from '@material-ui/icons/AddCircle';
 import BoomtownLogo from './../../images/boomtown.svg';
 import Button from '@material-ui/core/Button';
-import Dots from '@material-ui/icons/MoreVert';
 import IconButton from '@material-ui/core/IconButton';
 import DropDown from '../DropDown';
 
@@ -18,15 +17,17 @@ const NavBar = ({ classes }) => {
     <div className={classes.root}>
       <AppBar>
         <Toolbar className={classes.Tool}>
-          <img
-            src={BoomtownLogo}
-            alt="Boomtown Logo"
-            className={classes.Logo}
-          />
+          <Link to="/items">
+            <img
+              src={BoomtownLogo}
+              alt="Boomtown Logo"
+              className={classes.Logo}
+            />
+          </Link>
           <div>
             <Link to="/share">
-              <Button to="/share">
-                <Icon />
+              <Button>
+                <Icon to="/share" />
                 SHARE SOMETHING
               </Button>
               <IconButton>
