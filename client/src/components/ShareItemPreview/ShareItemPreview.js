@@ -1,12 +1,17 @@
 import React from 'react';
 import ItemCards from '../ItemCards/ItemCards';
+import { connect } from 'react-redux';
 
-const ShareItemPreview = ({ classes }) => {
+const ShareItemPreview = ({ ShareItemPreview }) => {
   return (
     <div>
-      <ItemCards />
+      <ItemCards item={ShareItemPreview} />
     </div>
   );
 };
 
-export default ShareItemPreview;
+const mapStateToProps = state => ({
+  ShareItemPreview: state.ShareItemPreview
+});
+
+export default connect(mapStateToProps)(ShareItemPreview);

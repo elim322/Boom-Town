@@ -9,6 +9,7 @@ import NavBar from '../components/NavBar';
 export default () => (
   <Fragment>
     <NavBar />
+
     <Switch>
       <Route exact path="/Items" component={Items} />
       <Route exact path="/Welcome" component={Welcome} />
