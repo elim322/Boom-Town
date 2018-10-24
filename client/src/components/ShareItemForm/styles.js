@@ -7,9 +7,9 @@ const styles = theme => ({
   },
   title: {
     fontWeight: 900,
-    marginTop: '30px',
+    marginTop: '50px',
     marginBottom: '50px',
-    width: '300px',
+    width: '260px',
     paddingLeft: '10px',
     fontSize: '50px',
     minWidth: '110%'

@@ -22,7 +22,6 @@ class ShareItemForm extends Component {
     super(props);
     this.fileInput = React.createRef();
     this.state = {
-      tags: 'Add Tag',
       open: false,
       fileSelected: '',
       done: false,
@@ -115,7 +114,7 @@ class ShareItemForm extends Component {
           color="secondary"
           gutterBottom
         >
-          SHARE. BORROW. PROSPER.
+          Share. Borrow. Prosper.
         </Typography>
         <Form
           // validate={values => this.validate(values)}
@@ -140,6 +139,9 @@ class ShareItemForm extends Component {
                         {!this.state.fileSelected ? (
                           <Button
                             onClick={() => this.fileInput.current.click()}
+                            variant="contained"
+                            color="primary"
+                            className={classes.select}
                           >
                             <Typography>Select an Image</Typography>
                           </Button>
@@ -208,7 +210,6 @@ class ShareItemForm extends Component {
                                 this.state.selectedTags.indexOf(tag.id) > -1
                               }
                             />
-                            {tag.title}
 
                             <ListItemText primary={tag.title} />
                           </MenuItem>
