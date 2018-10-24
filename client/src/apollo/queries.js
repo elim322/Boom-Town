@@ -8,22 +8,23 @@ const ItemFields = gql`
   fragment ItemFields on Item {
     id
     title
+    imageurl
     description
-    date
+    itemowner {
+      id
+      email
+      fullname
+      bio
+    }
     tags {
       id
       title
     }
-    itemowner {
-      id
-      fullname
-      email
-      bio
-    }
+    date
     borrower {
       id
-      fullname
       email
+      fullname
       bio
     }
   }

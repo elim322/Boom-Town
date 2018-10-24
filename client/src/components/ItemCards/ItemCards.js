@@ -25,8 +25,13 @@ function ItemCards(props) {
         <Typography className={classes.description} component="p">
           {props.item.description}
         </Typography>
+        <Typography component="p">
+          {props.item.tags.map((tag, index) => {
+            if (index < props.item.tags.length - 1) return tag.title + ', ';
+            return tag.title;
+          })}
+        </Typography>
       </CardContent>
-
       <CardActions>
         <Button className={classes.borrow} size="large" variant="outlined">
           Borrow
