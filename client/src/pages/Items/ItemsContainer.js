@@ -13,7 +13,7 @@ class ItemsContainer extends Component {
           if (error) return `${error}`;
           if (data) {
             console.log(data);
-            return <Items data={data} />;
+            return <Items items={data.items} />;
           }
         }}
       </Query>

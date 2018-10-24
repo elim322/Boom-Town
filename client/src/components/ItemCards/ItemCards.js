@@ -23,15 +23,15 @@ function ItemCards(props) {
           variant="h5"
           component="h2"
         >
-          Name your item
+          {props.item.title}
         </Typography>
         <Typography className={classes.description} component="p">
-          Describe your item
+          {props.item.description}
         </Typography>
       </CardContent>
 
       <CardActions>
-        <Button className={classes.borrow} size="large" variant="contained">
+        <Button className={classes.borrow} size="large" variant="outlined">
           Borrow
         </Button>
       </CardActions>
@@ -42,5 +42,12 @@ function ItemCards(props) {
 // ItemCards.propTypes = {
 //   classes: PropTypes.object.isRequired
 // };
+
+ItemCards.defaultProps = {
+  item: {
+    title: 'Name your item',
+    description: 'Describe your item'
+  }
+};
 
 export default withStyles(styles)(ItemCards);
