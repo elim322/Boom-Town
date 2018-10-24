@@ -2,15 +2,15 @@ import { withStyles } from '@material-ui/core/styles';
 import React from 'react';
 import styles from './styles';
 import UserProfileCard from '../../components/UserProfileCard';
+import Grid from '@material-ui/core/Grid';
 
 const Profile = ({ classes }) => {
   return (
-    <div className={classes.root}>
-      <UserProfileCard className={classes.card} />
-      <p>
-        This is the profile page located at <code>/profile/:userId</code>.
-      </p>
-    </div>
+    <Grid className={classes.root}>
+      <div>
+        <UserProfileCard className={classes.card} />
+      </div>
+    </Grid>
   );
 };
 
