@@ -3,6 +3,7 @@ import React from 'react';
 import styles from './styles';
 import UserProfileCard from '../../components/UserProfileCard';
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
 const Profile = ({ classes }) => {
   return (
@@ -10,6 +11,9 @@ const Profile = ({ classes }) => {
       <div>
         <UserProfileCard className={classes.card} />
       </div>
+      <Typography className={classes.title} color="primary">
+        Shared Items
+      </Typography>
     </Grid>
   );
 };
