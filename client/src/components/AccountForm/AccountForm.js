@@ -27,102 +27,120 @@ class AccountForm extends Component {
     };
   }
 
+  submitTheForm(e, form) {
+    console.log('submitting!', form.getState().values);
+    //fire mutation with form values
+    !form.valid && form.reset();
+  }
+
+  //https://stackoverflow.com/questions/43922508/clear-and-reset-form-input-fields/43922523
+  handleSubmit(e) {
+    e.preventDefault();
+    e.target.reset();
+  }
+
   render() {
     const { classes } = this.props;
 
     return (
-      // @TODO: Wrap in Final Form <Form />
-      <form
-        onSubmit={() => {
-          console.log('Submitted');
-        }}
-        className={classes.accountForm}
-      >
-        {!this.state.formToggle && (
-          <FormControl fullWidth className={classes.formControl}>
-            <InputLabel htmlFor="fullname">Username</InputLabel>
-            {/* @TODO: Wrap in a Final Form <Field /> */}
-            <Input
-              id="fullname"
-              type="text"
-              inputProps={{
-                autoComplete: 'off'
-              }}
-              value={''}
-            />
-            {/* @TODO: Close Final Form <Field /> */}
-          </FormControl>
-        )}
-        <FormControl fullWidth className={classes.formControl}>
-          <InputLabel htmlFor="email">Email</InputLabel>
-          <Field name="email">
-            {({ input, meta }) => (
-              <Input
-                id="email"
-                type="text"
-                inputProps={{
-                  autoComplete: 'off'
-                }}
-                {...input}
-              />
-            )}
-          </Field>
-        </FormControl>
-        <FormControl fullWidth className={classes.formControl}>
-          <InputLabel htmlFor="password">Password</InputLabel>
-          {/* @TODO: Wrap in a Final Form <Field /> */}
-          <Input
-            id="password"
-            type="password"
-            inputProps={{
-              autoComplete: 'off'
+      <Form
+        validate={values => this.validate(values)}
+        onSubmit={(e, form) => this.submitTheForm(e, form)}
+        render={({ handleSubmit, invalid, pristine }) => (
+          <form
+            onSubmit={() => {
+              console.log('Submitted');
             }}
-            value={''}
-          />
-          {/* @TODO: Close Final Form <Field /> */}
-        </FormControl>
-        <FormControl className={classes.formControl}>
-          <Grid
-            container
-            direction="row"
-            justify="space-between"
-            alignItems="center"
+            className={classes.accountForm}
           >
-            <Button
-              type="submit"
-              className={classes.formButton}
-              variant="contained"
-              size="large"
-              color="secondary"
-              disabled={
-                false // @TODO: This prop should depend on pristine or valid state of form
-              }
-            >
-              {this.state.formToggle ? 'Enter' : 'Create Account'}
-            </Button>
-            <Typography>
-              <button
-                className={classes.formToggle}
-                type="button"
-                onClick={() => {
-                  // @TODO: Reset the form on submit
-                  this.setState({
-                    formToggle: !this.state.formToggle
-                  });
-                }}
+            {!this.state.formToggle && (
+              <FormControl fullWidth className={classes.formControl}>
+                <InputLabel htmlFor="fullname">Username</InputLabel>
+                <Field name="username" component="input" placeholder="Username">
+                  {({ input, meta }) => (
+                    <Input
+                      id="fullname"
+                      type="text"
+                      inputProps={{
+                        autoComplete: 'off'
+                      }}
+                      {...input}
+                    />
+                  )}
+                </Field>
+              </FormControl>
+            )}
+            <FormControl fullWidth className={classes.formControl}>
+              <InputLabel htmlFor="email">Email</InputLabel>
+              <Field name="email" component="input" placeholder="Email">
+                {({ input, meta }) => (
+                  <Input
+                    id="email"
+                    type="text"
+                    inputProps={{
+                      autoComplete: 'off'
+                    }}
+                    {...input}
+                  />
+                )}
+              </Field>
+            </FormControl>
+            <FormControl fullWidth className={classes.formControl}>
+              <InputLabel htmlFor="password">Password</InputLabel>
+              <Field name="password">
+                {({ input, meta }) => (
+                  <Input
+                    id="password"
+                    type="password"
+                    inputProps={{
+                      autoComplete: 'off'
+                    }}
+                    {...input}
+                  />
+                )}
+              </Field>
+            </FormControl>
+            <FormControl className={classes.formControl}>
+              <Grid
+                container
+                direction="row"
+                justify="space-between"
+                alignItems="center"
               >
-                {this.state.formToggle
-                  ? 'Create an account.'
-                  : 'Login to existing account.'}
-              </button>
+                <Button
+                  type="submit"
+                  className={classes.formButton}
+                  variant="contained"
+                  size="large"
+                  color="secondary"
+                  disabled={pristine || invalid}
+                >
+                  {this.state.formToggle ? 'Enter' : 'Create Account'}
+                </Button>
+                <Typography>
+                  <button
+                    className={classes.formToggle}
+                    type="button"
+                    onClick={() => {
+                      handleSubmit;
+                      this.setState({
+                        formToggle: !this.state.formToggle
+                      });
+                    }}
+                  >
+                    {this.state.formToggle
+                      ? 'Create an account.'
+                      : 'Login to existing account.'}
+                  </button>
+                </Typography>
+              </Grid>
+            </FormControl>
+            <Typography className={classes.errorMessage}>
+              {/* @TODO: Display sign-up and login errors */}
             </Typography>
-          </Grid>
-        </FormControl>
-        <Typography className={classes.errorMessage}>
-          {/* @TODO: Display sign-up and login errors */}
-        </Typography>
-      </form>
-      // @TODO: Close Final Form <Form />
+          </form>
+        )}
+      />
     );
   }
 }
