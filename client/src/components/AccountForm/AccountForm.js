@@ -44,9 +44,9 @@ class AccountForm extends Component {
 
     return (
       <Form
-        validate={values => this.validate(values)}
-        onSubmit={values => console.log(values)}
-        render={({ handleSubmit, invalid, pristine, values }) => (
+        onSubmit={this.state.formToggle}
+        initialValues={{}}
+        render={({ mutation, handleSubmit, invalid, pristine, values }) => (
           <form onSubmit={handleSubmit} className={classes.accountForm}>
             {!this.state.formToggle && (
               <FormControl fullWidth className={classes.formControl}>
