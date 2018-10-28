@@ -32,18 +32,18 @@ import './index.css';
 
 const App = () => {
   return (
-    <ViewerProvider>
-      <ReduxProvider store={store}>
-        <MuiThemeProvider theme={theme}>
-          <ApolloProvider client={client}>
+    <ApolloProvider client={client}>
+      <ViewerProvider>
+        <ReduxProvider store={store}>
+          <MuiThemeProvider theme={theme}>
             <CssBaseline />
             <Router>
               <Layout />
             </Router>
-          </ApolloProvider>
-        </MuiThemeProvider>
-      </ReduxProvider>
-    </ViewerProvider>
+          </MuiThemeProvider>
+        </ReduxProvider>
+      </ViewerProvider>
+    </ApolloProvider>
   );
 };
 

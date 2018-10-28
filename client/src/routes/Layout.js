@@ -5,21 +5,16 @@ import Items from '../pages/Items';
 import Profile from '../pages/Profile';
 import Share from '../pages/Share';
 import NavBar from '../components/NavBar';
-import { ViewerContext } from '../context/ViewerProvider';
 
 export default () => (
   <Fragment>
     <NavBar />
-    <ViewerContext.Consumer>
-      {({ viewer, loading }) => (
-        <Switch>
-          <Route exact path="/Items" component={Items} />
-          <Route exact path="/Welcome" component={Welcome} />
-          <Route exact path="/Share" component={Share} />
-          <Route exact path="/Profile/:id" component={Profile} />
-          <Redirect to="/Welcome" />
-        </Switch>
-      )}
-    </ViewerContext.Consumer>
+    <Switch>
+      <Route exact path="/Items" component={Items} />
+      <Route exact path="/Welcome" component={Welcome} />
+      <Route exact path="/Share" component={Share} />
+      <Route exact path="/Profile/:id" component={Profile} />
+      <Redirect to="/Welcome" />
+    </Switch>
   </Fragment>
 );

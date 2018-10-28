@@ -9,13 +9,13 @@ import Typography from '@material-ui/core/Typography';
 
 import { Form, Field } from 'react-final-form';
 
-import {
-  LOGIN_MUTATION,
-  SIGNUP_MUTATION,
-  VIEWER_QUERY
-} from '../../apollo/queries';
-import { graphql, compose } from 'react-apollo';
-import validate from './helpers/validation';
+// import {
+//   LOGIN_MUTATION,
+//   SIGNUP_MUTATION,
+//   VIEWER_QUERY
+// } from '../../apollo/queries';
+// import { graphql, compose } from 'react-apollo';
+// import validate from './helpers/validation';
 
 import styles from './styles';
 
@@ -27,17 +27,17 @@ class AccountForm extends Component {
     };
   }
 
-  submitTheForm(e, form) {
-    console.log('submitting!', form.getState().values);
-    //fire mutation with form values
-    !form.valid && form.reset();
-  }
+  // submitTheForm(e, form) {
+  //   console.log('submitting!', form.getState().values);
+  //   //fire mutation with form values
+  //   !form.valid && form.reset();
+  // }
 
   //https://stackoverflow.com/questions/43922508/clear-and-reset-form-input-fields/43922523
-  handleSubmit(e) {
-    e.preventDefault();
-    e.target.reset();
-  }
+  // handleSubmit(e) {
+  //   e.preventDefault();
+  //   e.target.reset();
+  // }
 
   render() {
     const { classes } = this.props;
@@ -45,18 +45,13 @@ class AccountForm extends Component {
     return (
       <Form
         validate={values => this.validate(values)}
-        onSubmit={(e, form) => this.submitTheForm(e, form)}
-        render={({ handleSubmit, invalid, pristine }) => (
-          <form
-            onSubmit={() => {
-              console.log('Submitted');
-            }}
-            className={classes.accountForm}
-          >
+        onSubmit={values => console.log(values)}
+        render={({ handleSubmit, invalid, pristine, values }) => (
+          <form onSubmit={handleSubmit} className={classes.accountForm}>
             {!this.state.formToggle && (
               <FormControl fullWidth className={classes.formControl}>
                 <InputLabel htmlFor="fullname">Username</InputLabel>
-                <Field name="username" component="input" placeholder="Username">
+                <Field name="fullname">
                   {({ input, meta }) => (
                     <Input
                       id="fullname"
@@ -72,7 +67,7 @@ class AccountForm extends Component {
             )}
             <FormControl fullWidth className={classes.formControl}>
               <InputLabel htmlFor="email">Email</InputLabel>
-              <Field name="email" component="input" placeholder="Email">
+              <Field name="email">
                 {({ input, meta }) => (
                   <Input
                     id="email"
@@ -113,7 +108,8 @@ class AccountForm extends Component {
                   variant="contained"
                   size="large"
                   color="secondary"
-                  disabled={pristine || invalid}
+                  disabled={false}
+                  // disabled={pristine || invalid}
                 >
                   {this.state.formToggle ? 'Enter' : 'Create Account'}
                 </Button>
@@ -122,7 +118,6 @@ class AccountForm extends Component {
                     className={classes.formToggle}
                     type="button"
                     onClick={() => {
-                      handleSubmit;
                       this.setState({
                         formToggle: !this.state.formToggle
                       });
