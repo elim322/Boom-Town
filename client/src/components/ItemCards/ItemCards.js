@@ -4,35 +4,38 @@ import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardHeader from '@material-ui/core/CardHeader';
+import Gravatar from 'react-gravatar';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import styles from './styles';
 
-function ItemCards(props) {
-  const { classes } = props;
+const ItemCards = ({ classes, item }) => {
   return (
     <Grid>
       <Card className={classes.card}>
-        <img
-          className={classes.media}
-          placeholder="Select your image"
-          src={props.item.imageurl}
-          alt="item"
-        />
+        <CardMedia className={classes.media} />
         <CardContent>
+          <CardHeader
+            title={item.itemowner.fullname}
+            avatar={<Gravatar email={item.itemowner.email} />}
+          />
           <Typography className={classes.name} gutterBottom component="h2">
-            {props.item.title}
+            {item.title}
           </Typography>
           <Typography className={classes.description} component="p">
-            {props.item.description}
+            {item.description}
           </Typography>
-          <Typography component="p">
-            {props.item.tags.map((tag, index) => {
-              if (index < props.item.tags.length - 1) return tag.title + ', ';
-              return tag.title;
-            })}
-          </Typography>
+          {item.tags && (
+            <Typography component="p">
+              {item.tags.map((tag, index) => {
+                if (index < item.tags.length - 1) return tag.title + ', ';
+                return tag.title;
+              })}
+            </Typography>
+          )}
         </CardContent>
         <CardActions>
           <Button className={classes.borrow} size="large" variant="outlined">
@@ -42,17 +45,10 @@ function ItemCards(props) {
       </Card>
     </Grid>
   );
-}
+};
 
 ItemCards.propTypes = {
   classes: PropTypes.object.isRequired
-};
-
-ItemCards.defaultProps = {
-  item: {
-    title: 'Name your item',
-    description: 'Describe your item'
-  }
 };
 
 export default withStyles(styles)(ItemCards);

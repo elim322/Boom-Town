@@ -94,14 +94,14 @@ module.exports = postgres => {
        *  Customize your throw statements so the message can be used by the client.
        */
 
-      const user = await postgres.query(findUserQuery);
-      return user.rows[0];
+      // const user = await postgres.query(findUserQuery);
+      // return user.rows[0];
       // -------------------------------
     },
     async getItems(filter) {
       const findItemQuery = {
         text: `SELECT * FROM items WHERE ownerid <> $1 AND borrowerid <> $1 OR borrowerid IS NULL`,
-        values: filter ? [filter] : []
+        values: [filter]
       };
       try {
         const items = await postgres.query(findItemQuery);

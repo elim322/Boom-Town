@@ -7,7 +7,7 @@ import styles from './styles';
 const Items = ({ classes, items }) => {
   return (
     <Grid className={classes.root}>
-      <ItemCards items={items} />
+      <ItemCards items={items} key={items.id} />
     </Grid>
   );
 };
