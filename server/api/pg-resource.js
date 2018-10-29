@@ -138,7 +138,9 @@ module.exports = postgres => {
     },
     async saveNewItem({ item, image, user }) {
       const newItemInsert = {
-        text: `INSERT INTO items(title, description, tags) SELECT tags.id, tags.title FROM tags`
+        text:
+          'INSERT INTO items (title, description, ownerid) VALUES ($1, $2, $3) RETURNING *',
+        values: [title, description, ownerid]
       };
       /**
        *  @TODO: Adding a New Item
