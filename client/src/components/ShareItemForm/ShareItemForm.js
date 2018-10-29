@@ -16,6 +16,7 @@ import {
   resetNewItem,
   resetNewItemImage
 } from '../../redux/modules/ShareItemPreview';
+import validate from './helpers/validation';
 
 class ShareItemForm extends Component {
   constructor(props) {
@@ -119,6 +120,7 @@ class ShareItemForm extends Component {
         <Form
           // validate={values => this.validate(values)}
           onSubmit={(e, form) => this.submitTheForm(e, form)}
+          validate={validate.bind(this)}
           render={({ handleSubmit }) => (
             <form onSubmit={e => handleSubmit(e)}>
               <FormSpy
@@ -166,6 +168,7 @@ class ShareItemForm extends Component {
                       <TextField
                         className={classes.itemName}
                         type="text"
+                        name="nameItem"
                         placeholder="Name your item"
                         inputProps={{ ...input }}
                       />
@@ -179,6 +182,7 @@ class ShareItemForm extends Component {
                       <TextField
                         className={classes.itemDescription}
                         type="text"
+                        name="describeItem"
                         placeholder="Describe your item"
                         inputProps={{ ...input }}
                       />
@@ -196,6 +200,7 @@ class ShareItemForm extends Component {
                       <Select
                         multiple
                         label="Add tags"
+                        name="tags"
                         renderValue={selectedTags => {
                           return this.generateTagsText(tags, selectedTags);
                         }}
