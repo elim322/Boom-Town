@@ -4,13 +4,20 @@
 
 A program that allows users to share an item with the ability to borrow/return.
 
-## Part 1: Backend (Part 2 to follow)
+## Part 1: Backend
 
 - PosgreSQL
 - GraphQL
 - Express
 - Node
 - Apollo
+
+## Part 2: Frontend
+
+- React.js
+- Material UI
+- Redux
+- Context
 
 ## Server
 
