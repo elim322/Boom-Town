@@ -6,7 +6,10 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Link } from 'react-router-dom';
 import FingerprintIcon from '@material-ui/icons/Fingerprint';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
-
+import { LOGOUT_MUTATION, VIEWER_QUERY } from '../../apollo/queries';
+import { graphql, compose } from 'react-apollo';
+import { withStyles } from '@material-ui/core/styles';
+import styles from './styles';
 const options = ['Your Profile', 'Sign Out'];
 
 const ITEM_HEIGHT = 48;
@@ -51,13 +54,13 @@ class DropDown extends React.Component {
           }}
         >
           <Link to="/profile/:id">
-            <MenuItem>
+            <MenuItem onClick={this.handleClose}>
               <FingerprintIcon />
-              <p>Your Profile </p>
+              <p>Your Profile</p>
             </MenuItem>
           </Link>
           <Link to="/welcome">
-            <MenuItem>
+            <MenuItem onClick={this.props.logoutMutation}>
               <PowerSettingsNewIcon />
               <p>Sign Out</p>
             </MenuItem>
@@ -69,4 +72,17 @@ class DropDown extends React.Component {
   }
 }
 
-export default DropDown;
+const refetchQueries = [
+  {
+    query: VIEWER_QUERY
+  }
+];
+export default compose(
+  graphql(LOGOUT_MUTATION, {
+    options: {
+      refetchQueries
+    },
+    name: 'logoutMutation'
+  }),
+  withStyles(styles)
+)(DropDown);

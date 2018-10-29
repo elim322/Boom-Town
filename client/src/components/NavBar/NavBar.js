@@ -26,14 +26,14 @@ const NavBar = ({ classes }) => {
           </Link>
 
           <Link to="/share">
-            <Button>
+            <Button className={classes.button}>
               <Icon to="/share" />
               SHARE SOMETHING
             </Button>
-            <IconButton>
-              <DropDown />
-            </IconButton>
           </Link>
+          <IconButton>
+            <DropDown />
+          </IconButton>
         </Toolbar>
       </AppBar>
     </div>

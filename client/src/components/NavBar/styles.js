@@ -19,6 +19,9 @@ const styles = theme => ({
   },
   Dots: {
     opacity: '0.5'
+  },
+  button: {
+    marginLeft: '1000px'
   }
 });
 

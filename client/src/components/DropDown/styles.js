@@ -4,9 +4,9 @@ const styles = theme => ({
     width: '200'
   },
   fingerprint: {
-    paddingRight: '10px'
+    paddingRight: '50px'
   },
   powerbutton: {
-    paddingRight: '10px'
+    paddingRight: '50px'
   }
 });
