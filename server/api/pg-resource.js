@@ -54,7 +54,7 @@ module.exports = postgres => {
     },
     async getUserById(id) {
       const findUserQuery = {
-        text: 'select id, fullname, bio, email from users where id = $1;', // @TODO: Basic queries
+        text: 'SELECT id, fullname, bio, email FROM users WHERE id = $1;', // @TODO: Basic queries
         values: [id]
       };
       try {
@@ -137,6 +137,9 @@ module.exports = postgres => {
       }
     },
     async saveNewItem({ item, image, user }) {
+      const newItemInsert = {
+        text: `INSERT INTO items(title, description, tags) SELECT tags.id, tags.title FROM tags`
+      };
       /**
        *  @TODO: Adding a New Item
        *
