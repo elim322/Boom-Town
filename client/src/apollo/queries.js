@@ -47,8 +47,6 @@ export const ALL_ITEMS_QUERY = gql`
 
 export const ALL_USER_ITEMS_QUERY = gql`
   query user($id: ID!) {
-    # @TODO: Query the bio, email, fullname, items, and borrowed for the user by id
-    # Use the ItemFields fragment for the items and borrowed fields.
     bio
     email
     fullname

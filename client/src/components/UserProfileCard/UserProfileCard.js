@@ -16,6 +16,7 @@ function UserProfileCard(props) {
         className={classes.media}
         placeholder="Select your image"
       />
+
       <CardContent className={classes.content}>
         <Typography
           className={classes.name}
