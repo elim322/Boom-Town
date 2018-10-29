@@ -24,17 +24,16 @@ const NavBar = ({ classes }) => {
               className={classes.Logo}
             />
           </Link>
-          <div>
-            <Link to="/share">
-              <Button>
-                <Icon to="/share" />
-                SHARE SOMETHING
-              </Button>
-              <IconButton>
-                <DropDown />
-              </IconButton>
-            </Link>
-          </div>
+
+          <Link to="/share">
+            <Button>
+              <Icon to="/share" />
+              SHARE SOMETHING
+            </Button>
+            <IconButton>
+              <DropDown />
+            </IconButton>
+          </Link>
         </Toolbar>
       </AppBar>
     </div>
