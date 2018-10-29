@@ -3,20 +3,17 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
+
 import Typography from '@material-ui/core/Typography';
 import styles from './styles';
+import Gravatar from 'react-gravatar';
+import CardHeader from '@material-ui/core/CardHeader';
 
 function UserProfileCard(props) {
-  const { classes } = props;
+  const { classes, user } = props;
   return (
     <Card className={classes.card}>
-      <CardMedia
-        component="img"
-        className={classes.media}
-        placeholder="Select your image"
-      />
-
+      <CardHeader avatar={<Gravatar email={user.email} />} />
       <CardContent className={classes.content}>
         <Typography
           className={classes.name}
@@ -24,10 +21,10 @@ function UserProfileCard(props) {
           variant="h5"
           component="h2"
         >
-          {props.user.fullname}
+          {user.fullname}
         </Typography>
         <Typography className={classes.description} component="p">
-          {props.user.bio}
+          {user.bio}
         </Typography>
       </CardContent>
     </Card>
