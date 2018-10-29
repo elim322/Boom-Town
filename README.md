@@ -14,7 +14,7 @@ A program that allows users to share an item with the ability to borrow/return.
 
 ## Part 2: Frontend
 
-- React.js
+- React
 - Material UI
 - Redux
 - Context
