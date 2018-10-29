@@ -48,9 +48,11 @@ module.exports = app => {
 
     async login(parent, args, context) {
       try {
+        console.log('I am trying to login');
         const user = await context.pgResource.getUserAndPasswordForVerification(
           args.user.email
         );
+        console.log(user);
         const valid = await bcrypt.compare(args.user.password, user.password);
 
         if (!valid || !user) throw 'User was not found.';
@@ -60,7 +62,7 @@ module.exports = app => {
           token: generateToken(user, app.get('JWT_SECRET')),
           res: context.req.res
         });
-
+        console.log(user.id);
         return {
           id: user.id
         };

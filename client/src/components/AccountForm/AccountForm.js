@@ -40,13 +40,17 @@ class AccountForm extends Component {
   // }
 
   render() {
-    const { classes } = this.props;
+    const { classes, loginMutation, signupMutation } = this.props;
 
     return (
       <Form
-        onSubmit={this.state.formToggle}
-        initialValues={{}}
-        render={({ mutation, handleSubmit, invalid, pristine, values }) => (
+        onSubmit={values => {
+          this.state.formToggle
+            ? loginMutation({ variables: { user: values } })
+            : signupMutation({ variables: { user: values } });
+        }}
+        validate={validate.bind(this)}
+        render={({ handleSubmit, invalid, pristine }) => (
           <form onSubmit={handleSubmit} className={classes.accountForm}>
             {!this.state.formToggle && (
               <FormControl fullWidth className={classes.formControl}>

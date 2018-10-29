@@ -6,7 +6,7 @@ import { onError } from 'apollo-link-error';
 
 const httpWithUploadsLink = createUploadLink({
   includeExtensions: true,
-  uri: process.env.NODE_ENV !== 'production' && 'http://localhost:8080/graphql' ,
+  uri: process.env.NODE_ENV !== 'production' && 'http://localhost:8080/graphql',
   // -------------------------------
   credentials: process.env.NODE_ENV === 'production' ? 'same-origin' : 'include'
 });
@@ -18,7 +18,9 @@ const client = new ApolloClient({
       if (graphQLErrors) {
         graphQLErrors.map(({ message, locations, path }) =>
           console.log(
-            `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+            `[GraphQL error]: Message: ${message}, Location: ${JSON.stringify(
+              locations
+            )}, Path: ${path}`
           )
         );
       }

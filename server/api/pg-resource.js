@@ -153,7 +153,7 @@ module.exports = postgres => {
         if (tags.rows.length < 1) throw 'Tag was not found.';
         return tags.rows;
       } catch (e) {
-        throw 'Tag was not found.';
+        return [];
       }
     },
     async saveNewItem({ item, image, user }) {

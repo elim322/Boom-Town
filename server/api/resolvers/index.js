@@ -57,7 +57,7 @@ module.exports = app => {
           const tags = await pgResource.getTags(id);
           return tags;
         } catch (e) {
-          throw new ApolloError(e);
+          return [];
         }
       }
     },
@@ -109,6 +109,7 @@ module.exports = app => {
         //gets items owned by a user by inputting userID
         try {
           const itemowner = await pgResource.getUserById(parent.ownerid);
+          console.log(itemowner, parent.ownerid);
           return itemowner;
         } catch (e) {
           throw new ApolloError(e);
@@ -124,9 +125,11 @@ module.exports = app => {
         }
       },
       async borrower(parent, { id }, { pgResource }, info) {
+        if (!parent.borrowerid) return null;
         // gets items borrowed by a user
         try {
           const borrower = await pgResource.getUserById(parent.borrowerid);
+          console.log(borrower, parent.borrowerid);
           return borrower;
         } catch (e) {
           throw new ApolloError(e);

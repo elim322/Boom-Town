@@ -1,13 +1,15 @@
 import { withStyles } from '@material-ui/core/styles';
 import React from 'react';
-import ItemCards from '../../components/ItemCards/ItemCards';
+import ItemCard from '../../components/ItemCard/ItemCard';
 import Grid from '@material-ui/core/Grid';
 import styles from './styles';
 
-const Items = ({ classes, items }) => {
+const Items = ({ classes, data }) => {
   return (
-    <Grid className={classes.root}>
-      <ItemCards items={items} key={items.id} />
+    <Grid className={classes.root} spacing={24}>
+      {data.items.map(item => {
+        return <ItemCard className={classes.card} item={item} key={item.id} />;
+      })}
     </Grid>
   );
 };
