@@ -10,7 +10,6 @@ const Items = ({ classes, items }) => {
       <ItemCards items={items} />
     </Grid>
   );
-  console.log('hello');
 };
 
 export default withStyles(styles)(Items);
