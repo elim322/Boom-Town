@@ -9,13 +9,13 @@ import Typography from '@material-ui/core/Typography';
 
 import { Form, Field } from 'react-final-form';
 
-// import {
-//   LOGIN_MUTATION,
-//   SIGNUP_MUTATION,
-//   VIEWER_QUERY
-// } from '../../apollo/queries';
-// import { graphql, compose } from 'react-apollo';
-// import validate from './helpers/validation';
+import {
+  LOGIN_MUTATION,
+  SIGNUP_MUTATION,
+  VIEWER_QUERY
+} from '../../apollo/queries';
+import { graphql, compose } from 'react-apollo';
+import validate from './helpers/validation';
 
 import styles from './styles';
 
@@ -108,8 +108,7 @@ class AccountForm extends Component {
                   variant="contained"
                   size="large"
                   color="secondary"
-                  disabled={false}
-                  // disabled={pristine || invalid}
+                  disabled={pristine || invalid}
                 >
                   {this.state.formToggle ? 'Enter' : 'Create Account'}
                 </Button>
@@ -140,6 +139,26 @@ class AccountForm extends Component {
   }
 }
 
+const refetchQueries = [
+  {
+    query: VIEWER_QUERY
+  }
+];
+export default compose(
+  graphql(SIGNUP_MUTATION, {
+    options: {
+      refetchQueries
+    },
+    name: 'signupMutation'
+  }),
+  graphql(LOGIN_MUTATION, {
+    options: {
+      refetchQueries
+    },
+    name: 'loginMutation'
+  }),
+  withStyles(styles)
+)(AccountForm);
+
 // @TODO: Use compose to add the login and signup mutations to this components props.
 // @TODO: Refetch the VIEWER_QUERY to reload the app and access authenticated routes.
-export default withStyles(styles)(AccountForm);
