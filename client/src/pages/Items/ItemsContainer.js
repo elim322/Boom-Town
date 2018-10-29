@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import { Query } from 'react-apollo';
 import { ALL_ITEMS_QUERY } from '../../apollo/queries';
 import Items from './Items';
