@@ -21,16 +21,13 @@ const ItemCard = ({ classes, item }) => {
           src={item.imageurl}
           alt="item"
         />
-        <CardContent>
+        <CardContent className={classes.content}>
           <CardHeader
             title={item.itemowner.fullname}
             avatar={<Gravatar email={item.itemowner.email} />}
           />
           <Typography className={classes.name} gutterBottom component="h2">
             {item.title}
-          </Typography>
-          <Typography className={classes.description} component="p">
-            {item.description}
           </Typography>
           {item.tags && (
             <Typography component="p">
@@ -40,6 +37,9 @@ const ItemCard = ({ classes, item }) => {
               })}
             </Typography>
           )}
+          <Typography className={classes.description} component="p">
+            {item.description}
+          </Typography>
         </CardContent>
         <CardActions>
           <Button className={classes.borrow} size="large" variant="outlined">

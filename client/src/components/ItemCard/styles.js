@@ -2,10 +2,15 @@ const styles = {
   card: {
     marginTop: '100px',
     width: 375,
-    height: 400
+    height: 500
+  },
+  content: {
+    wordWrap: 'break-word'
   },
   media: {
-    background: 'grey'
+    background: 'grey',
+    width: 375,
+    height: 225
   },
   name: {
     marginTop: '30px'
@@ -14,7 +19,7 @@ const styles = {
     marginTop: '30px'
   },
   borrow: {
-    marginTop: '30px'
+    justifyContent: 'flex-end'
   }
 };
 

@@ -1,11 +1,11 @@
 import React from 'react';
-import ItemCards from '../ItemCards/ItemCards';
+import ItemCard from '../ItemCard/ItemCard';
 import { connect } from 'react-redux';
 
 const ShareItemPreview = ({ shareItemPreview }) => {
   return (
     <div>
-      <ItemCards item={shareItemPreview} />
+      <ItemCard item={shareItemPreview} />
     </div>
   );
 };
