@@ -3,16 +3,15 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 function setCookie({ tokenName, token, res }) {
-  // const token = jwt.sign();
   res.cookie(tokenName, token, {
-    maxAge: 1000 * 60 * 60 * 2, //2h
+    maxAge: 1000 * 60 * 60 * 2,
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production'
   });
 }
 
 function generateToken(user, secret) {
-  const { id, email, fullname, bio } = user; // Omit the password from the token
+  const { id, email, fullname, bio } = user;
   let token = jwt.sign({ id, email, fullname, bio }, secret, {
     expiresIn: '2h'
   });
@@ -57,7 +56,6 @@ module.exports = app => {
 
         if (!valid || !user) throw 'User was not found.';
         setCookie({
-          //response object to set cookie
           tokenName: app.get('JWT_COOKIE_NAME'),
           token: generateToken(user, app.get('JWT_SECRET')),
           res: context.req.res

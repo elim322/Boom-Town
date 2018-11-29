@@ -64,19 +64,6 @@ module.exports = postgres => {
       } catch (e) {
         throw 'User was not found.';
       }
-
-      /**
-       *  Refactor the following code using the error handling logic described above.
-       *  When you're done here, ensure all of the resource methods in this file
-       *  include a try catch, and throw appropriate errors.
-       *
-       *  Here is an example throw statement: throw 'User was not found.'
-       *  Customize your throw statements so the message can be used by the client.
-       */
-
-      // const user = await postgres.query(findUserQuery);
-      // return user.rows[0];
-      // -------------------------------
     },
     async getItems(filter) {
       const findItemQuery = {
@@ -137,111 +124,62 @@ module.exports = postgres => {
       }
     },
     async saveNewItem({ item, image, user }) {
-      const newItemInsert = {
-        text:
-          'INSERT INTO items (title, description, ownerid) VALUES ($1, $2, $3) RETURNING *',
-        values: [title, description, ownerid]
-      };
-      /**
-       *  @TODO: Adding a New Item
-       *
-       *  Adding a new Item to Posgtres is the most advanced query.
-       *  It requires 3 separate INSERT statements.
-       *
-       *  All of the INSERT statements must:
-       *  1) Proceed in a specific order.
-       *  2) Succeed for the new Item to be considered added
-       *  3) If any of the INSERT queries fail, any successful INSERT
-       *     queries should be 'rolled back' to avoid 'orphan' data in the database.
-       *
-       *  To achieve #3 we'll ue something called a Postgres Transaction!
-       *  The code for the transaction has been provided for you, along with
-       *  helpful comments to help you get started.
-       *
-       *  Read the method and the comments carefully before you begin.
-       */
-
       return new Promise((resolve, reject) => {
-        /**
-         * Begin transaction by opening a long-lived connection
-         * to a client from the client pool.
-         */
         postgres.connect((err, client, done) => {
           try {
-            // Begin postgres transaction
-            client.query('BEGIN', err => {
-              // Convert image (file stream) to Base64
+            client.query('BEGIN', async err => {
               const imageStream = image.stream.pipe(strs('base64'));
 
-              let base64Str = '';
+              let base64Str = 'data:image/*;base64, ';
               imageStream.on('data', data => {
                 base64Str += data;
               });
-
               imageStream.on('end', async () => {
-                // Image has been converted, begin saving things
                 const { title, description, tags } = item;
 
-                // Generate new Item query
-                // @TODO
-                // -------------------------------
-
-                // Insert new Item
-                // @TODO
-                // -------------------------------
-
+                const newItemInsert = {
+                  text:
+                    'INSERT INTO items (title, description, ownerid) VALUES ($1, $2, $3) RETURNING *',
+                  values: [title, description, user.id]
+                };
+                const newItem = await client.query(newItemInsert);
+                const itemId = newItem.rows[0].id;
                 const imageUploadQuery = {
                   text:
                     'INSERT INTO uploads (itemid, filename, mimetype, encoding, data) VALUES ($1, $2, $3, $4, $5) RETURNING *',
                   values: [
-                    // itemid,
+                    itemId,
                     image.filename,
                     image.mimetype,
                     'base64',
                     base64Str
                   ]
                 };
+                await client.query(imageUploadQuery);
 
-                // Upload image
-                const uploadedImage = await client.query(imageUploadQuery);
-                const imageid = uploadedImage.rows[0].id;
-
-                // Generate image relation query
-                // @TODO
-                // -------------------------------
-
-                // Insert image
-                // @TODO
-                // -------------------------------
-
-                // Generate tag relationships query (use the'tagsQueryString' helper function provided)
-                // @TODO
-                // -------------------------------
-
-                // Insert tags
-                // @TODO
-                // -------------------------------
-
-                // Commit the entire transaction!
+                const tagsQuery = {
+                  text: `INSERT INTO itemtags (tagid, itemid) VALUES ${tagsQueryString(
+                    [...tags],
+                    itemId,
+                    ''
+                  )}`,
+                  values: tags.map(tag => tag.id)
+                };
+                await client.query(tagsQuery);
                 client.query('COMMIT', err => {
                   if (err) {
                     throw err;
                   }
-                  // release the client back to the pool
                   done();
-                  // Uncomment this resolve statement when you're ready!
-                  // resolve(newItem.rows[0])
-                  // -------------------------------
+                  resolve(newItem.rows[0]);
                 });
               });
             });
           } catch (e) {
-            // Something went wrong
             client.query('ROLLBACK', err => {
               if (err) {
                 throw err;
               }
-              // release the client back to the pool
               done();
             });
             switch (true) {

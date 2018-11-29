@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 import Icon from '@material-ui/icons/AddCircle';
 import BoomtownLogo from './../../images/boomtown.svg';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
 import DropDown from '../DropDown';
 
 const NavBar = ({ classes }) => {
@@ -31,9 +30,7 @@ const NavBar = ({ classes }) => {
               SHARE SOMETHING
             </Button>
           </Link>
-          <IconButton>
-            <DropDown />
-          </IconButton>
+          <DropDown />
         </Toolbar>
       </AppBar>
     </div>

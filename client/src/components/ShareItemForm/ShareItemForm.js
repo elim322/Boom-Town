@@ -16,7 +16,8 @@ import {
   resetNewItem,
   resetNewItemImage
 } from '../../redux/modules/ShareItemPreview';
-import validate from './helpers/validation';
+import { graphql, compose } from 'react-apollo';
+import { ADD_ITEM_MUTATION, VIEWER_QUERY } from '../../apollo/queries';
 
 class ShareItemForm extends Component {
   constructor(props) {
@@ -26,7 +27,8 @@ class ShareItemForm extends Component {
       open: false,
       fileSelected: '',
       done: false,
-      selectedTags: []
+      selectedTags: [],
+      imageurl: ''
     };
   }
 
@@ -60,26 +62,12 @@ class ShareItemForm extends Component {
     );
   }
 
-  submitTheForm(e, form) {
-    console.log('submitting!', form.getState().values);
-    //fire mutation with form values
-    !form.valid && form.reset();
-  }
-
-  handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-
   handleClose = () => {
     this.setState({ open: false });
   };
 
   handleOpen = () => {
     this.setState({ open: true });
-  };
-
-  handleChange = tag => event => {
-    this.setState({ [tag]: event.target.checked });
   };
 
   handleSelectTag(event) {
@@ -103,9 +91,32 @@ class ShareItemForm extends Component {
       tags: this.applyTags(tags)
     });
   }
+  addItem(values, addItemMutation, tags) {
+    console.log('ADD ITEM', values);
+    const {
+      validity,
+      files: [file]
+    } = this.fileInput.current;
+    if (!validity.valid || !file) return;
+    try {
+      const itemData = {
+        title: values.title,
+        description: values.description,
+        tags: this.applyTags(tags)
+      };
+      addItemMutation({
+        variables: {
+          item: itemData,
+          image: file
+        }
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   render() {
-    const { classes, tags, updateNewItem } = this.props;
+    const { classes, tags, updateNewItem, addItemMutation } = this.props;
     return (
       <div className={classes.root}>
         <Typography
@@ -118,11 +129,16 @@ class ShareItemForm extends Component {
           Share. Borrow. Prosper.
         </Typography>
         <Form
-          // validate={values => this.validate(values)}
-          onSubmit={(e, form) => this.submitTheForm(e, form)}
-          validate={validate.bind(this)}
+          onSubmit={values => {
+            console.log('im here');
+            this.addItem(values, addItemMutation, tags);
+          }}
           render={({ handleSubmit }) => (
-            <form onSubmit={e => handleSubmit(e)}>
+            <form
+              onSubmit={event => {
+                handleSubmit(event);
+              }}
+            >
               <FormSpy
                 subscription={{ values: true }}
                 component={({ values }) => {
@@ -137,7 +153,7 @@ class ShareItemForm extends Component {
                   <Field
                     name="imageurl"
                     render={({ input, meta }) => (
-                      <React.Fragment>
+                      <Fragment>
                         {!this.state.fileSelected ? (
                           <Button
                             onClick={() => this.fileInput.current.click()}
@@ -159,7 +175,7 @@ class ShareItemForm extends Component {
                           hidden
                           onChange={event => this.handleSelectFile(event)}
                         />
-                      </React.Fragment>
+                      </Fragment>
                     )}
                   />
                   <Field
@@ -226,7 +242,6 @@ class ShareItemForm extends Component {
               </fieldset>
               <fieldset className={classes.share}>
                 <Button
-                  id="submit"
                   type="submit"
                   variant="contained"
                   color="primary"
@@ -255,7 +270,20 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
+const refetchQueries = [
+  {
+    query: VIEWER_QUERY
+  }
+];
 export default connect(
-  undefined,
+  null,
   mapDispatchToProps
-)(withStyles(styles)(ShareItemForm));
+)(
+  compose(
+    graphql(ADD_ITEM_MUTATION, {
+      options: { refetchQueries },
+      name: 'addItemMutation'
+    }),
+    withStyles(styles)
+  )(ShareItemForm)
+);

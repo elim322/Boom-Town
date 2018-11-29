@@ -18,7 +18,11 @@ const ItemCard = ({ classes, item }) => {
         <img
           className={classes.media}
           placeholder="Select your image"
-          src={item.imageurl}
+          src={
+            item.imageurl
+              ? item.imageurl
+              : 'https://www.google.com/search?q=image+place+holder&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjmkZaeofreAhXpr1QKHcMyDw4Q_AUIDigB&biw=1398&bih=720&dpr=2#imgrc=hmgd4haVH-iT9M:'
+          }
           alt="item"
         />
         <CardContent className={classes.content}>

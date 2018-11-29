@@ -2,7 +2,7 @@ const styles = {
   card: {
     marginTop: '100px',
     width: 375,
-    height: 500
+    height: 600
   },
   content: {
     wordWrap: 'break-word'

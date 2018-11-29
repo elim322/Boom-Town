@@ -27,18 +27,6 @@ class AccountForm extends Component {
     };
   }
 
-  // submitTheForm(e, form) {
-  //   console.log('submitting!', form.getState().values);
-  //   //fire mutation with form values
-  //   !form.valid && form.reset();
-  // }
-
-  //https://stackoverflow.com/questions/43922508/clear-and-reset-form-input-fields/43922523
-  // handleSubmit(e) {
-  //   e.preventDefault();
-  //   e.target.reset();
-  // }
-
   render() {
     const { classes, loginMutation, signupMutation } = this.props;
 
@@ -164,5 +152,3 @@ export default compose(
   withStyles(styles)
 )(AccountForm);
 
-// @TODO: Use compose to add the login and signup mutations to this components props.
-// @TODO: Refetch the VIEWER_QUERY to reload the app and access authenticated routes.

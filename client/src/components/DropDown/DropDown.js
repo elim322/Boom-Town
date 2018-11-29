@@ -5,12 +5,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Link } from 'react-router-dom';
 import FingerprintIcon from '@material-ui/icons/Fingerprint';
+import { ViewerContext } from '../../context/ViewerProvider';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import { LOGOUT_MUTATION, VIEWER_QUERY } from '../../apollo/queries';
 import { graphql, compose } from 'react-apollo';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
-const options = ['Your Profile', 'Sign Out'];
 
 const ITEM_HEIGHT = 48;
 
@@ -53,12 +53,16 @@ class DropDown extends React.Component {
             }
           }}
         >
-          <Link to="/profile/:id">
-            <MenuItem onClick={this.handleClose}>
-              <FingerprintIcon />
-              <p>Your Profile</p>
-            </MenuItem>
-          </Link>
+          <ViewerContext.Consumer>
+            {({ viewer }) => (
+              <Link to={`/profile/${viewer.id}`}>
+                <MenuItem onClick={this.handleClose}>
+                  <FingerprintIcon />
+                  <p>Your Profile</p>
+                </MenuItem>
+              </Link>
+            )}
+          </ViewerContext.Consumer>
           <Link to="/welcome">
             <MenuItem onClick={this.props.logoutMutation}>
               <PowerSettingsNewIcon />

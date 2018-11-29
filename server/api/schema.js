@@ -12,7 +12,6 @@ const { gql } = require('apollo-server-express');
  */
 module.exports = gql`
   scalar Upload
-
   scalar Date
 
   type Item {
@@ -85,6 +84,6 @@ module.exports = gql`
     login(user: Login!): User
     logout: Boolean
     signup(user: NewUserInput!): User
-    addItem(item: NewItemInput!, image: Upload): Item
+    addItem(item: NewItemInput!, image: Upload!): Item
   }
 `;

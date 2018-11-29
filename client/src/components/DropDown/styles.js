@@ -10,3 +10,5 @@ const styles = theme => ({
     paddingRight: '50px'
   }
 });
+
+export default styles;

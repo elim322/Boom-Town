@@ -34,7 +34,7 @@ module.exports = ({ app, pgResource }) => {
     uploads: true,
     cors: app.get('CORS_CONFIG'),
     uploads: apolloUploadExpress({
-      maxFileSize: 10000000 // 10mb
+      maxFileSize: 10000000
     })
   });
 };
