@@ -65,7 +65,6 @@ module.exports = app => {
       async itemowner(parent, { id }, { pgResource }, info) {
         try {
           const itemowner = await pgResource.getUserById(parent.ownerid);
-          console.log(itemowner, parent.ownerid);
           return itemowner;
         } catch (e) {
           throw new ApolloError(e);
@@ -83,7 +82,6 @@ module.exports = app => {
         if (!parent.borrowerid) return null;
         try {
           const borrower = await pgResource.getUserById(parent.borrowerid);
-          console.log(borrower, parent.borrowerid);
           return borrower;
         } catch (e) {
           throw new ApolloError(e);
@@ -104,6 +102,7 @@ module.exports = app => {
       async addItem(parent, args, context, info) {
         const image = await args.image;
         const user = await jwt.decode(context.token, app.get('JWT_SECRET'));
+        console.log(user, 'user');
         const newItem = await context.pgResource.saveNewItem({
           item: args.item,
           image,

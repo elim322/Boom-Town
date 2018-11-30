@@ -92,12 +92,12 @@ class ShareItemForm extends Component {
     });
   }
   addItem(values, addItemMutation, tags) {
-    console.log('ADD ITEM', values);
-    const {
-      validity,
-      files: [file]
-    } = this.fileInput.current;
-    if (!validity.valid || !file) return;
+    console.log(tags);
+    // const {
+    //   validity,
+    //   files: [file]
+    // } = this.fileInput.current;
+    // if (!validity.valid || !file) return;
     try {
       const itemData = {
         title: values.title,
@@ -106,8 +106,7 @@ class ShareItemForm extends Component {
       };
       addItemMutation({
         variables: {
-          item: itemData,
-          image: file
+          item: itemData
         }
       });
     } catch (e) {

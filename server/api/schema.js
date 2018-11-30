@@ -84,6 +84,6 @@ module.exports = gql`
     login(user: Login!): User
     logout: Boolean
     signup(user: NewUserInput!): User
-    addItem(item: NewItemInput!, image: Upload!): Item
+    addItem(item: NewItemInput!): Item
   }
 `;

@@ -29,8 +29,6 @@ function UserProfileCard(props) {
   );
 }
 
-
-
 UserProfileCard.defaultProps = {
   user: {
     fullname: 'Einer',

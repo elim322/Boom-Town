@@ -21,7 +21,7 @@ const ItemCard = ({ classes, item }) => {
           src={
             item.imageurl
               ? item.imageurl
-              : 'https://www.google.com/search?q=image+place+holder&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjmkZaeofreAhXpr1QKHcMyDw4Q_AUIDigB&biw=1398&bih=720&dpr=2#imgrc=hmgd4haVH-iT9M:'
+              : 'https://www.google.com/search?q=emilio+lombana&tbm=isch&source=iu&ictx=1&fir=9-OLSL3Z9BI0YM%253A%252Ci5TFWCKxBSZoWM%252C_&usg=AI4_-kQMtEvlc3j04xzvNWJmdpMFNJO8pw&sa=X&ved=2ahUKEwjsw4HO5vreAhVCLX0KHc0TDJIQ9QEwBHoECAAQBA#imgrc=UrTaO7DjyO_xgM:'
           }
           alt="item"
         />
