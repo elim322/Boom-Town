@@ -8,10 +8,10 @@ import Gravatar from 'react-gravatar';
 import CardHeader from '@material-ui/core/CardHeader';
 
 function UserProfileCard(props) {
-  const { classes, user } = props;
+  const { classes, user, data } = props;
   return (
     <Card className={classes.card}>
-      <CardHeader avatar={<Gravatar email={user.email} />} />
+      <CardHeader avatar={<Gravatar email={data.user.email} />} />
       <CardContent className={classes.content}>
         <Typography
           className={classes.name}
@@ -19,10 +19,10 @@ function UserProfileCard(props) {
           variant="h5"
           component="h2"
         >
-          {user.fullname}
+          {data.user.fullname}
         </Typography>
         <Typography className={classes.description} component="p">
-          {user.bio}
+          {data.user.bio}
         </Typography>
       </CardContent>
     </Card>

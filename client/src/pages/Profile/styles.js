@@ -6,6 +6,15 @@ const styles = theme => ({
   },
   title: {
     fontSize: '50px'
+  },
+  card: {
+    maxWidth: '250px',
+    maxHeight: '350px'
+  },
+  items: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap'
   }
 });
 
